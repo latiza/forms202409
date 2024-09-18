@@ -1,0 +1,37 @@
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+Ez egy szabályrendszert definiál, amely meghatározza, hogy milyen formátumú email-címek fogadhatók el érvényesként. Nézzük meg részletesen, mit jelent az egyes része:
+
+Részletes elemzés:
+^: A regex kezdetét jelzi. Azt mondja meg, hogy a minta az email-cím elején kezdődjön, azaz nem lehet előtte más karakter.
+
+[a-zA-Z0-9._%+-]+:
+
+Ez a szakasz az email-cím felhasználónév részére vonatkozik, azaz az "@" előtti részre.
+[a-zA-Z0-9]: Ez azt mondja, hogy csak az angol kis- és nagybetűk (a-z, A-Z), valamint számok (0-9) szerepelhetnek.
+[._%+-]: Ez megengedi a pontot (.), aláhúzást (_), százalékjelet (%), pluszjelet (+) és kötőjelet (-).
++: Legalább egy karaktert vár el ebből a karakterkészletből, de akár több is lehet. Tehát az email-felhasználónévnek minimum egy karakter hosszúnak kell lennie.
+@: Az "@" karaktert követeli meg, amely elválasztja a felhasználónevet és a domain nevet az email-címben.
+
+[a-z0-9.-]+:
+
+Ez a rész a domain név elejére (az "@" után) vonatkozik.
+[a-z]: A domain név kisbetűs angol betűket tartalmazhat.
+[0-9]: A domain név számokat is tartalmazhat.
+[.-]: A domain névben megengedett a pont (".") és a kötőjel ("-") is.
++: Legalább egy karaktert vár el ebből a karakterkészletből.
+.: Ez a kód egy pontot (".") vár el a domain név végén, ez általában a domain végződéseket jelzi, mint például ".com", ".net", ".org".
+
+[a-z]{2,4}:
+
+Ez a szakasz a domain végződésére vonatkozik, például ".com" vagy ".net".
+[a-z]: Kisbetűs karaktereket engedélyez a domain végződésében.
+{2,4}: A domain végződésének hossza legalább 2 és legfeljebb 4 karakter lehet (pl. "com", "net", "info").
+$: A regex végét jelzi. Azt mondja meg, hogy az email-címnek pontosan ezzel a formátummal kell végződnie, és nem lehet más karakter utána.
+
+Összefoglalás:
+Ez a reguláris kifejezés olyan email-címeket ellenőriz, amelyek:
+
+Egy vagy több érvényes karaktert tartalmaznak a felhasználónév részben, ahol ezek lehetnek betűk, számok, pont, aláhúzás, százalék, plusz, vagy kötőjel.
+Az "@" szimbólumot kötelezően tartalmazzák.
+A domain név része egy vagy több betűt, számot, pontot vagy kötőjelet tartalmazhat.
+A domain név után egy pont következik, majd egy legalább 2, legfeljebb 4 karakter hosszú domain végződés (pl. .com, .org, .net).

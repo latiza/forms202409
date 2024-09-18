@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adatbekérő űrlap</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .course-options {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<form action="form.php" method="POST" enctype="multipart/form-data">
+    <label for="name">Név (kötelező):</label>
+    <input type="text" name="name" required>
+
+    <label for="email">Email (kötelező):</label>
+    <input type="email" name="email" required>
+
+    <label for="phone">Telefonszám (kötelező):</label>
+    <input type="tel" name="phone" required>
+
+    <fieldset class="course-options">
+        <legend>Válasszon tanfolyamot:</legend>
+        <input type="radio" id="frontend" name="course" value="Frontend" required>
+        <label for="frontend">Frontend</label><br>
+
+        <input type="radio" id="backend" name="course" value="Backend">
+        <label for="backend">Backend</label><br>
+
+        <input type="radio" id="fullstack" name="course" value="Fullstack">
+        <label for="fullstack">Fullstack</label><br>
+    </fieldset>
+
+    <label for="photo">Fotó feltöltése (nem kötelező):</label>
+    <input type="file" name="photo">
+
+    <input type="submit" value="Beküldés">
+</form>
+
+</body>
+</html>

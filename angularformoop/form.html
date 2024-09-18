@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="formApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="css/style.css">
+    <title>Adatbekérő űrlap</title>
+    
+</head>
+<body ng-controller="FormController">
+    <!-- Ha az űrlap nem lett beküldve -->
+    <div ng-if="!formSubmitted">
+        <!-- Az űrlap a következő AngularJS direktívákkal -->
+        <form id="userForm" method="post" enctype="multipart/form-data" ng-submit="submitForm()" novalidate>
+            <label for="name">Név (kötelező):</label>
+            <!-- ng-model: a formData objektumban tárolt név változóhoz köti az input értékét -->
+            <input type="text" name="name" id="name" ng-model="formData.name" required>
+
+            <label for="email">Email (kötelező):</label>
+            <!-- ng-model: a formData objektumban tárolt email változóhoz köti az input értékét -->
+            <input type="email" name="email" id="email" ng-model="formData.email" required>
+
+            <label for="phone">Telefonszám (kötelező, legalább 8 karakter):</label>
+            <!-- ng-model: a formData objektumban tárolt phone változóhoz köti az input értékét -->
+            <input type="tel" name="phone" id="phone" ng-model="formData.phone" required minlength="8">
+
+            <fieldset>
+                <legend>Válasszon tanfolyamot:</legend>
+                <!-- ng-model: a formData objektumban tárolt course változóhoz köti az input értékét -->
+                <input type="radio" id="frontend" name="course" value="Frontend" ng-model="formData.course" required>
+                <label for="frontend">Frontend</label><br>
+
+                <input type="radio" id="backend" name="course" value="Backend" ng-model="formData.course" required>
+                <label for="backend">Backend</label><br>
+
+                <input type="radio" id="fullstack" name="course" value="Fullstack" ng-model="formData.course" required>
+                <label for="fullstack">Fullstack</label><br>
+            </fieldset>
+
+            <label for="photo">Fotó feltöltése (nem kötelező):</label>
+            <input type="file" name="photo" id="photo">
+
+            <!-- ng-submit: a form elküldésekor a submitForm() függvény hívódik meg -->
+            <input type="submit" value="Beküldés">
+            <div class="error">{{ error }}</div>
+        </form>
+    </div>
+
+    <!-- Ha az űrlap már beküldésre került -->
+    <div ng-if="formSubmitted">
+        <h2>Beküldött adatok:</h2>
+        <!-- Az AngularJS interpolációs szintaxisa: {{ expression }} -->
+        <p>Név: {{ submissionResult.name }}</p>
+        <p>Email: {{ submissionResult.email }}</p>
+        <p>Telefonszám: {{ submissionResult.phone }}</p>
+        <p>Választott tanfolyam: {{ submissionResult.course }}</p>
+        <div ng-if="submissionResult.photo">
+            <p>Feltöltött fotó:</p>
+            <!-- ng-src: AngularJS által biztosított direktíva a képek helyes betöltéséhez, a {{ submissionResult.photo }} az URL-t adja meg -->
+            <img ng-src="{{ submissionResult.photo }}" alt="Feltöltött fotó" style="max-width:200px;">
+        </div>
+        <div ng-if="!submissionResult.photo">
+            <p>Nem lett fotó feltöltve.</p>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="form.js"></script>
+</body>
+</html>
